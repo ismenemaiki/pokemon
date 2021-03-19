@@ -1,3 +1,11 @@
-<p>
-  detalhes works!
-</p>
+<div *ngIf="carta">
+  <img [src]="carta.images?.large">
+  <h1>nome: {{carta.name}}</h1>
+  <h4>id: {{carta.id}}</h4>
+  <h4>tipos: {{ carta.types}}</h4>
+  <h4>resistencia: {{ carta?.resistances[0]?.type }}</h4>
+  <h4>fraqueza: {{ carta.weaknesses[0].type }}</h4>
+  <h4>ataques: {{ carta.attacks[0].name }}</h4>
+</div>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>

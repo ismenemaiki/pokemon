@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CartasComponent } from './components/cartas/cartas.component';
 import { DetalhesComponent } from './components/detalhes/detalhes.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRouting,
-    HttpClientModule
+    HttpClientModule,
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent],
