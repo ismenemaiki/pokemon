@@ -8,6 +8,7 @@ import { CartasComponent } from './components/cartas/cartas.component';
 import { DetalhesComponent } from './components/detalhes/detalhes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
+import { ModalComponent, ModalModule } from 'ngb-modal';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,12 @@ import { SwiperModule } from 'swiper/angular';
     BrowserModule,
     AppRouting,
     HttpClientModule,
-    SwiperModule
+    SwiperModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

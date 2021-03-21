@@ -12,7 +12,7 @@ export const cartasMock = {
       {
         name: 'Damage Bind',
         text:
-          "Each Pokémon that has any damage counters on it (both yours and your opponent's) can't use any Poké-Powers.",
+          `Each Pokémon that has any damage counters on it (both yours and your opponent's) can't use any Poké-Powers.`,
         type: 'Poké-Body',
       },
     ],
