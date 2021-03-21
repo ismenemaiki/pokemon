@@ -1,0 +1,10 @@
+<div class="centralizado">
+  <div class="paginacao">
+    <a (click)="paginaAnterior()" id="botao_anterior">{{'<'}}</a>
+    <div *ngFor="let item of botoes">
+      <a (click)="trocaPagina(item)">{{ item }}</a>
+    </div>
+    <a (click)="proximaPagina()" id="botao_proximo">{{'>'}}</a>
+  </div>
+  pagina: <span id="pagina_atual"></span>
+</div>

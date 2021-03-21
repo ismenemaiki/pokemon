@@ -1,3 +1,4 @@
+
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,6 +10,7 @@ import { DetalhesComponent } from './components/detalhes/detalhes.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SwiperModule } from 'swiper/angular';
 import { ModalComponent, ModalModule } from 'ngb-modal';
+import { ComponentesCompartilhadosModule } from './components/shared/paginacao/componentes-compartilhados.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { ModalComponent, ModalModule } from 'ngb-modal';
     AppRouting,
     HttpClientModule,
     SwiperModule,
-    ModalModule
+    ModalModule,
+    ComponentesCompartilhadosModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,22 @@
+@import '../../../../styles/variaveis/mixin';
+
+.paginacao {
+  display: flex;
+  align-items: center;
+  place-content: center;
+}
+a {
+  width: 40px;
+  height: 40px;
+  background-color: $verde1;
+  margin: 2px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: $amarelo;
+  border-radius: 2px;
+}
+
+.centralizado {
+  text-align: center;
+}
