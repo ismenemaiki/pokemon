@@ -1,11 +1,57 @@
-<div *ngIf="carta">
-  <img [src]="carta.images?.large">
-  <h1>nome: {{carta.name}}</h1>
-  <h4>id: {{carta.id}}</h4>
-  <h4>tipos: {{ carta.types}}</h4>
-  <h4>resistencia: {{ carta?.resistances[0]?.type }}</h4>
-  <h4>fraqueza: {{ carta.weaknesses[0].type }}</h4>
-  <h4>ataques: {{ carta.attacks[0].name }}</h4>
+<div class="caixa">
+  <div class="detalhes-carta">
+    <img [src]="carta.images?.large">
+    <div class="nome-id item">
+      <span class="label">nome</span>
+      <p> {{ carta.name }} ({{ carta.id }}) </p>
+    </div>
+    <div class="tipo item">
+      <span class="label">tipo</span>
+      <p> {{ carta.types }} </p>
+    </div>
+    <div class="resistencia item">
+      <span class="label">resistencia</span>
+      <ul *ngFor="let resistencia of carta.resistances">
+        <li> {{ resistencia.type }} </li>
+      </ul>
+      <p *ngIf="!carta.resistances"> N/A </p>
+    </div>
+    <div class="fraquezas item">
+      <span class="label">fraquezas</span>
+      <ul *ngFor="let fraqueza of carta.weaknesses">
+        <li> {{ fraqueza.type }} </li>
+      </ul>
+      <p *ngIf="!carta.weaknesses"> N/A </p>
+    </div>
+    <div class="ataques item" (click)="abrirModal()">
+      <span class="label">ataques</span>
+      <ul *ngFor="let ataque of carta.attacks">
+        <li> {{ ataque.name }} </li>
+      </ul>
+    </div>
+  </div>
 </div>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>
+<modal #modalDetalhes class="conteudo-modal" (onOpen)="abrirModal()" (onClose)="fecharModal()">
+  <modal-header>
+    <h1>Detalhes do ataque</h1>
+  </modal-header>
+  <modal-content>
+    <div>
+      <div class="ataque" *ngFor="let ataque of carta.attacks">
+        <div class="linha">
+          <section class="cost">
+            <div *ngFor="let item of ataque.cost">
+              <img class="imagem-cost" [src]="getLogoCost(item)" alt="item">
+            </div>
+          </section>
+          <p class="nome m-auto">{{ ataque.name }}</p>
+          <p class="dano ml-auto">{{ ataque.damage }}</p>
+        </div>
+        <p class="linha">{{ ataque.text }}</p>
+      </div>
+    </div>
+  </modal-content>
+  <modal-footer>
+    <button class="botao-mobile" (click)="fecharModal()">fechar</button>
+  </modal-footer>
+</modal>

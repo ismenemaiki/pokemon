@@ -9,13 +9,15 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 })
 
 export class GerenciadorDeChamadasService {
+
+  constructor(private httpClient: HttpClient) {}
   private readonly apiKey = '4da0c1ce-8005-4d60-888f-2df76250f6af';
   private readonly contentType: string = 'Content-Type';
   private readonly applicationJson: string = 'application/json';
 
   private readonly apiCartas = 'https://api.pokemontcg.io/v2/cards';
-
-  constructor(private httpClient: HttpClient) {}
+  itensPorPagina: number;
+  sub$ = new Subject();
 
  /**
   * monta o header para requisição na api.
