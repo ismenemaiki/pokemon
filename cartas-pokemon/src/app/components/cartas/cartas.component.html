@@ -1,9 +1,7 @@
 
-<div class="container-mobile" >
+<div class="container-mobile" *ngIf="false" >
   <swiper [slidesPerView]="1" [navigation]="true" >
     <ng-template swiperSlide *ngFor="let carta of cartas" >
-      <div class="conteudo-carta" (click)="detalhes(carta.id)" >
-        <img [src]="carta.images.small" [alt]="carta.name">
       <div>
         <h1>{{ carta.name }}</h1>
         <span class="d-flex">
@@ -11,7 +9,25 @@
           <h4>tipo: {{ carta.types }}</h4>
         </span>
       </div>
+      <div class="conteudo-carta" (click)="detalhes(carta.id)" >
+        <img [src]="carta.images.small" [alt]="carta.name">
       </div>
     </ng-template>
   </swiper>
+</div>
+<div class="container-desktop">
+  <input type="text" #pokemon>
+  <button (click)="buscarPorNome(pokemon.value)">procurar</button>
+
+  <div class="grid">
+    <div class="catras-grid" *ngFor="let item of exibir" >
+      <div class="tamanho-cartas">{{item.adName}}</div>
+    </div>
+  </div>
+  <app-paginacao
+    (paginaSelecionada)="recebePagina($event)"
+    [paginaAtual]="paginaAtual"
+    [(itensPorPagina)]="itensPorPagina"
+    [totalItens]="cartas2.length">
+  </app-paginacao>
 </div>

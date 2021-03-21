@@ -1,6 +1,4 @@
 
-@media screen and (max-width: 360px) {
-
   .container-mobile {
     border: 0px solid blue;
   }
@@ -14,4 +12,32 @@
   .d-flex {
     justify-content: space-around;
   }
-}
+
+  @media only screen and (max-width: 1900px) and (min-width: 768px)  {
+    .caixa {
+      display: flex;
+      justify-content: center;
+      width: 1100px;
+      box-shadow: 0px 10px 23px 0px rgba(0, 0, 0, 0.2);
+    }
+    .conteudo-carta {
+     border: 0px solid red;
+    }
+    .tamanho-cartas {
+      border: 2px solid red;
+      width: 175px;
+      height: 300px;
+    }
+    .catras-grid {
+      padding: 10px;
+    }
+    .grid {
+      border: 1px solid green;
+      display: flex;
+      max-width: 980px;
+      flex-wrap: wrap;
+    }
+  }
+  app-paginacao {
+    text-align: center;
+  }
