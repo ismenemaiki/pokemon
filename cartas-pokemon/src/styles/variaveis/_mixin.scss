@@ -1,0 +1,16 @@
+@import '../variaveis/cores';
+
+@mixin botao {
+  color: $branco;
+  background: #000;
+  border-radius: 0;
+  padding: 10px 30px;
+}
+@mixin exibicao {
+  height: 50px;
+  background-color: $verde1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $amarelo;
+}

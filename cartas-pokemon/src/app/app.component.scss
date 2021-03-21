@@ -1,0 +1,15 @@
+@import '../styles/variaveis/cores';
+@import '../styles/variaveis/mixin';
+
+.conteudo {
+  background: linear-gradient(-45deg, #c2e232 0%, #e8f5a3 50%, #8fb605 100%);
+  text-align: -webkit-center;
+}
+.cabecalho {
+  font-size: 20px;
+  @include exibicao;
+}
+.rodape {
+  font-size: 16px;
+  @include exibicao;
+}
