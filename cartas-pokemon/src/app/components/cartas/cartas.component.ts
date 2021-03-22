@@ -67,14 +67,14 @@ export class CartasComponent implements OnInit {
   getCartas(): void {
     if (this.isDesktop) {
       this.gerenciador.getCartas(this.viaMock).subscribe({
-        next: retorno => (this.viaMock ? this.cartasMock = retorno : this.cartas = retorno),
+        next: retorno => (this.viaMock ? this.cartasMock = retorno.sort(this.ordenarCartas) : this.cartas = retorno.sort(this.ordenarCartas)),
         error: err => console.error('Erro na requisição: ' + err),
         complete: () => console.log('Finalizado a requisição ao getCartas()')
       });
       this.recebePagina(1);
     } else {
       this.gerenciador.getCartas(this.viaMock).subscribe({
-        next: retorno => (this.cartas = retorno),
+        next: retorno => (this.cartas = retorno.sort(this.ordenarCartas)),
         error: err => console.error('Erro na requisição: ' + err),
         complete: () => console.log('Finalizado a requisição ao getCartas()')
       });
@@ -91,6 +91,9 @@ export class CartasComponent implements OnInit {
         this.recebePagina(1);
       }
     });
+  }
+  ordenarCartas(carta1, carta2) {
+    return carta1.name < carta2.name ? -1 : 1;
   }
   limpaArray(array: Array<any>): void {
     while (array.length) {
