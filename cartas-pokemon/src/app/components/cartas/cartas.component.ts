@@ -1,6 +1,6 @@
-import { Subject } from 'rxjs';
+import { BrowserDetectService } from './../../services/browser-detect.service';
 import { GerenciadorDeChamadasService } from './../../services/gerenciador-de-chamadas.service';
-import { Component,  OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import 'swiper/swiper-bundle.css';
 import SwiperCore, { Navigation } from 'swiper/core';
 import { Router } from '@angular/router';
@@ -13,45 +13,36 @@ SwiperCore.use([Navigation]);
   styleUrls: ['./cartas.component.scss'],
 })
 export class CartasComponent implements OnInit {
+  isMobile: boolean = false;
+  isDesktop: boolean = false;
+
   paginaAtual = 1;
-  itensPorPagina = 5;
+  itensPorPagina = 10;
 
-
-  cartas: Array<any>;
-  cartas2: Array<any>;
+  cartas = [];
+  cartasMock = [];
   exibir = [];
-  changeLog = [];
   constructor(
     private gerenciador: GerenciadorDeChamadasService,
-    private router: Router
+    private router: Router,
+    private browserDetect: BrowserDetectService
   ) {}
-
   ngOnInit() {
+    this.isMobile = this.browserDetect.isMobile();
+    this.isDesktop = this.browserDetect.isDesktop();
     this.getCartas();
-    this.cartas2 = [
-      { adName: 'maiki' },
-      { adName: 'm' },
-      { adName: 'j' },
-      { adName: 'AdName 4' },
-      { adName: 'AdName 5' },
-      { adName: 'AdName 6' },
-      { adName: 'AdName 7' },
-      { adName: 'AdName 8' },
-      { adName: 'AdName 9' },
-      { adName: 'AdName 10' },
-      { adName: 'AdName 10' },
-      { adName: 'AdName 10' },
-      { adName: 'AdName 10' },
-      { adName: 'AdName 10' },
-      { adName: 'AdName 10' },
-    ];
   }
+
   recebePagina(pagina: number): void {
     this.paginaAtual = pagina;
     this.limpaArray(this.exibir);
-    for (let i = (pagina - 1) * this.itensPorPagina; i < pagina * this.itensPorPagina; i++) {
-      if (this.cartas2[i]) {
-        this.exibir.push(this.cartas2[i]);
+    for (
+      let i = (pagina - 1) * this.itensPorPagina;
+      i < pagina * this.itensPorPagina;
+      i++
+    ) {
+      if (this.cartasMock) {
+        this.exibir.push(this.cartasMock[i]);
       }
     }
   }
@@ -59,31 +50,33 @@ export class CartasComponent implements OnInit {
     console.log(id);
     this.router.navigate(['/detalhes', id]);
   }
-  getCartas(): void {
-    this.gerenciador.getCartas().subscribe((cartas) => {
-      // this.cartas = cartas.body.data;
+  getCartas() {
+    if (this.isDesktop) {
       this.gerenciador.getCartas().subscribe((it: any) => {
-        this.cartas = [it];
+        this.cartasMock = it;
       });
-    });
+      this.recebePagina(1);
+    } else {
+      this.gerenciador.getCartas().subscribe((it: any) => {
+        this.cartas = it;
+      });
+    }
   }
-  buscarPorNome(nome: string) {
-    this.cartas2.forEach((pokemon) => {
-      if (pokemon.adName === nome) {
+  buscarPorNome(nome: string): void {
+    this.cartasMock.forEach((pokemon) => {
+      if (pokemon.name === nome) {
         this.limpaArray(this.exibir);
         this.exibir.push(pokemon);
-        // this.itensPorPagina = 2;
-        this.ngOnInit();
+      }
+      if (nome === '') {
+        this.limpaArray(this.exibir);
+        this.recebePagina(1);
       }
     });
-    // if (nome === '') {
-    //   this.limpaArray(this.exibir);
-    //   this.exibir.push(this.cartas2);
-    // }
   }
   limpaArray(array: Array<any>): void {
     while (array.length) {
       array.pop();
-   }
+    }
   }
 }
