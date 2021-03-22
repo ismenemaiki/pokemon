@@ -1,9 +1,7 @@
-
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRouting } from './app.routing';
-
 import { AppComponent } from './app.component';
 import { CartasComponent } from './components/cartas/cartas.component';
 import { DetalhesComponent } from './components/detalhes/detalhes.component';
@@ -16,7 +14,7 @@ import { ComponentesCompartilhadosModule } from './components/shared/paginacao/c
   declarations: [
     AppComponent,
     CartasComponent,
-    DetalhesComponent
+    DetalhesComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +22,8 @@ import { ComponentesCompartilhadosModule } from './components/shared/paginacao/c
     HttpClientModule,
     SwiperModule,
     ModalModule,
-    ComponentesCompartilhadosModule
+    ComponentesCompartilhadosModule,
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent],
