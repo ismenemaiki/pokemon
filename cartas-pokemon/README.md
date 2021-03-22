@@ -27,3 +27,7 @@ Durante a criação do app responsivo (mobile first) tive alguns problemas:
 
 4. Para esse problema de 'sincronia' (mesmo com observable) criei um mock com menos itens e retornava na chamada da service convertendo o retorno para um observable (para continuar igual ao retorno original da API). Feito isso utilizava o retorno do mock normalmente.
 OBS: O request feito a API com ID funciona normalmente (por isso eu acho que tem relação ao tamanho do objeto de cards retornado).
+
+## LINK publicado
+
+[link da Aplicação] (https://maiki-pokemon.vercel.app/)
