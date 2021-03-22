@@ -30,4 +30,4 @@ OBS: O request feito a API com ID funciona normalmente (por isso eu acho que tem
 
 ## LINK publicado
 
-[link da Aplicação] (https://maiki-pokemon.vercel.app/)
+- [link da Aplicação] (https://maiki-pokemon.vercel.app/)
