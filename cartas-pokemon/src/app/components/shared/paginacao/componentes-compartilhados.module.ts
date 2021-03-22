@@ -1,14 +1,20 @@
-import { PaginacaoComponent } from './paginacao.component';
+
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { PaginacaoComponent } from './paginacao.component';
 
 @NgModule({
   declarations: [
-    PaginacaoComponent,
+    PaginacaoComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CommonModule
   ],
   providers: [],
+  exports: [
+    PaginacaoComponent
+  ]
 })
 export class ComponentesCompartilhadosModule { }

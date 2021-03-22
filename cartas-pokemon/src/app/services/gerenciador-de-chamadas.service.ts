@@ -1,8 +1,8 @@
 import { cartasMock } from './../apis/mock-cartas';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,9 +36,11 @@ export class GerenciadorDeChamadasService {
   * @returns observable com todas as cartas.
   */
   getCartas(): Observable<any>{
-    return this.httpClient.get(
-      `${this.apiCartas}`, { headers: this.getHeader(), observe: 'response' })
-      .pipe(tap((cartas) => cartas.body.data));
+    // return this.httpClient.get(
+    //   `${this.apiCartas}`, { headers: this.getHeader(), observe: 'response' })
+    //   .pipe(map((cartas: any) => cartas.body.data));
+    return of(cartasMock.data);
+
   }
  /**
   * busca uma carta na api.
@@ -48,9 +50,9 @@ export class GerenciadorDeChamadasService {
   */
   getCartaPorId(id: string) {
     // 1° busca da api 2° busca do mock
-    // return this.httpClient.get(
-    //   `${this.apiCartas}/${id}`, { headers: this.getHeader(), observe: 'response' })
-    //   .pipe(tap((carta: any) => carta.body.data));
-    return of(cartasMock.data);
+    return this.httpClient.get(
+      `${this.apiCartas}/${id}`, { headers: this.getHeader(), observe: 'response' })
+      .pipe(tap((carta: any) => carta.body.data));
+    // return of(cartasMock.data);
   }
 }

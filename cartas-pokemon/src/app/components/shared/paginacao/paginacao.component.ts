@@ -5,7 +5,6 @@ import {
   AfterViewInit,
   Output,
   EventEmitter,
-  SimpleChanges,
 } from '@angular/core';
 
 @Component({
@@ -20,7 +19,7 @@ export class PaginacaoComponent implements OnInit, AfterViewInit {
   @Output() paginaSelecionada = new EventEmitter();
 
   botoes = new Array();
-  changeLog = [];
+
   constructor() {}
 
   ngOnInit() {
