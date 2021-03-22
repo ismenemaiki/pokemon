@@ -10,16 +10,16 @@ import { ModalManager } from 'ngb-modal';
 })
 export class DetalhesComponent implements OnInit, OnChanges {
   @ViewChild('modalDetalhes') modalDetalhes;
-  private modalRef;
+  modalRef;
   idCarta: string;
   carta: any = []; // tipar
   constructor(
     private route: ActivatedRoute,
     private gerenciador: GerenciadorDeChamadasService,
-    private modal: ModalManager
+    public modal: ModalManager
   ) {}
 
-  abrirModal() {
+  abrirModal(): void {
     this.modalRef = this.modal.open(this.modalDetalhes, {
       size: '',
       modalClass: 'modalDetalhes',
@@ -31,7 +31,7 @@ export class DetalhesComponent implements OnInit, OnChanges {
       closeOnOutsideClick: true,
     });
   }
-  fecharModal() {
+  fecharModal(): void {
     this.modal.close(this.modalRef);
   }
   ngOnChanges() {
@@ -41,7 +41,7 @@ export class DetalhesComponent implements OnInit, OnChanges {
     this.idCarta = this.route.snapshot.params.id;
     this.getDetalhesCarta();
   }
-  getDetalhesCarta() {
+  getDetalhesCarta(): void {
     // 1° busca da api 2° busca do mock
     this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => {this.carta = it.body.data; console.log('RETORNO API: ', it)});
     // this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => {
