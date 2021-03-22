@@ -43,9 +43,10 @@ export class DetalhesComponent implements OnInit, OnChanges {
   }
   getDetalhesCarta() {
     // 1° busca da api 2° busca do mock
-    // this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => {this.carta = it.body.data; console.log('RETORNO API: ', it)});
-    this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => { this.carta = it.body.data; console.log('RETORNO MOCK', it.body.data);
-     });
+    this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => {this.carta = it.body.data; console.log('RETORNO API: ', it)});
+    // this.gerenciador.getCartaPorId(this.idCarta).subscribe((it: any) => {
+    //   this.carta = it.body.data; console.log('RETORNO MOCK', it.body.data);
+    //  });
   }
   getLogoCost(cost): string {
     return `../../../assets/img/costs/${cost}.png`;

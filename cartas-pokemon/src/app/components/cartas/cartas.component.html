@@ -21,13 +21,13 @@
   <div class="grid">
     <div class="cartas-grid" *ngFor="let item of exibir" >
       <div>
-        <p>{{ item.name }}</p>
-        <span class="d-flex">
-          <p>id: {{ item.id }}</p>
-          <p>tipo: {{ item.types }}</p>
+        <p>{{ item?.name }}</p>
+        <span class="jc">
+          <p>id: {{ item?.id }}</p>
+          <p>tipo: {{ item?.types }}</p>
         </span>
       </div>
-      <img class="tamanho-cartas" (click)="detalhes(item.id)" [src]="item.images.small" [alt]="item.name">
+      <img class="tamanho-cartas" (click)="detalhes(item.id)" [src]="item?.images.small" [alt]="item?.name">
     </div>
   </div>
   <app-paginacao

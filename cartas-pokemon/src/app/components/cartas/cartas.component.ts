@@ -13,6 +13,7 @@ SwiperCore.use([Navigation]);
   styleUrls: ['./cartas.component.scss'],
 })
 export class CartasComponent implements OnInit {
+  viaMock: boolean = true;
   isMobile: boolean = false;
   isDesktop: boolean = false;
 
@@ -22,6 +23,7 @@ export class CartasComponent implements OnInit {
   cartas = [];
   cartasMock = [];
   exibir = [];
+
   constructor(
     private gerenciador: GerenciadorDeChamadasService,
     private router: Router,
@@ -36,13 +38,25 @@ export class CartasComponent implements OnInit {
   recebePagina(pagina: number): void {
     this.paginaAtual = pagina;
     this.limpaArray(this.exibir);
+    /*
+      Quando viaMock é setado como true, o observable do getCartas() é resolvido ANTES e this.cartasMock é entregue completo aqui.
+      Quando false, o observable do getCartas() é resolvido DEPOIS por isso não entrega o objeto a tempo.
+      Creio que seja por conta do tamanho e da demora em resolver. Não tive tempo de conseguir entender.
+    */
+    console.log('Variavel com o retorno da chamada: ', this.cartasMock);
     for (
       let i = (pagina - 1) * this.itensPorPagina;
       i < pagina * this.itensPorPagina;
       i++
     ) {
-      if (this.cartasMock) {
-        this.exibir.push(this.cartasMock[i]);
+      if (this.viaMock) {
+        if (this.cartasMock) {
+          this.exibir.push(this.cartasMock[i]);
+        }
+      } else {
+        if (this.cartas) {
+          this.exibir.push(this.cartas[i]);
+        }
       }
     }
   }
@@ -50,15 +64,19 @@ export class CartasComponent implements OnInit {
     console.log(id);
     this.router.navigate(['/detalhes', id]);
   }
-  getCartas() {
+  getCartas(): void {
     if (this.isDesktop) {
-      this.gerenciador.getCartas().subscribe((it: any) => {
-        this.cartasMock = it;
+      this.gerenciador.getCartas(this.viaMock).subscribe({
+        next: retorno => (this.viaMock ? this.cartasMock = retorno : this.cartas = retorno),
+        error: err => console.error('Erro na requisição: ' + err),
+        complete: () => console.log('Finalizado a requisição ao getCartas()')
       });
       this.recebePagina(1);
     } else {
-      this.gerenciador.getCartas().subscribe((it: any) => {
-        this.cartas = it;
+      this.gerenciador.getCartas(this.viaMock).subscribe({
+        next: retorno => (this.cartas = retorno),
+        error: err => console.error('Erro na requisição: ' + err),
+        complete: () => console.log('Finalizado a requisição ao getCartas()')
       });
     }
   }
